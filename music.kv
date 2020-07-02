@@ -1,0 +1,524 @@
+#:kivy 1.10
+#:import utils kivy.utils
+#:import Menu components.sidebar.Menu
+#:import AudioState utils.manager.AudioState
+
+
+<Content>:
+    orientation: 'vertical'
+    padding: 0, 32, 15, 0
+    spacing: 25
+    canvas.before:
+        Color:
+            rgba: utils.rgba('#121212')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<HeaderTitle>:
+    font_size: 55
+    bold: True
+    text_size: self.size
+    size_hint_y: None
+    height: 60
+
+    
+<LoadingScreen>:
+    anchor_x: 'center'
+    anchor_y: 'center'
+    canvas.before:
+        Color:
+            rgba: utils.rgba('#121212')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        width: 60
+        height: 100
+        Image:
+            anim_delay: 0.04
+            source: 'assets/animation/spinner.gif'
+        Label:
+            text: root.message
+            bold: True
+
+
+<ErrorScreen>:
+    anchor_x: 'center'
+    anchor_y: 'center'
+    canvas.before:
+        Color:
+            rgba: utils.rgba('#121212')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        width: 60
+        height: 100
+        Image:
+            source: root.icon
+        Label:
+            text: root.message
+            bold: True
+            color: utils.rgba('#909090')
+
+
+#############################
+# Music Sidebar
+#############################
+
+<SidebarWrapper@BoxLayout>:
+    orientation: 'horizontal'
+
+
+<Sidebar>:
+    orientation: 'vertical'
+    size_hint_x: None
+    padding: 10, 20
+    width: 230
+    canvas.before:
+        Color:
+            rgba: utils.rgba('#121212')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<MenuItem>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    padding: 20, 10
+    height: 40
+    Image:
+        source: root.icon_source_active if root.is_selected else root.icon_source
+        size_hint_x: None
+        width: 14
+    Label:
+        text_size: self.size
+        padding: 20, 0
+        text: root.name
+        bold: True
+        halign: 'left'
+        valign: 'middle'
+        color: utils.rgba('#ffffff') if root.is_selected else utils.rgba('#909090') 
+
+
+
+#############################
+# Music About & Setting
+#############################
+
+<AudioLocation>:
+    app: app
+    size_hint_y: None
+    height: 30
+    text_size: self.size
+    multiline: False
+    hint_text: 'Set file location'
+    background_color: utils.rgba('#1c1c1c')
+    foreground_color: utils.rgba('#ffffff')
+    cursor_color: utils.rgba('#ffffff')
+    valign: 'middle'
+    size_hint_x: None
+    width: 200
+    padding: [10, 7]
+
+
+<SettingScreen>:
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 40
+        Label:
+            text: 'Local dir'
+            text_size: self.size
+            size_hint_y: None
+            size_hint_x: None
+            height: 25
+            bold: True
+            valign: 'middle'
+        AudioLocation:
+            id: location
+        SetLocation:
+            text: 'Set location'
+            size_hint_y: None
+            size_hint_x: None
+            font_size: 12
+            valign: 'middle'
+            height: 22
+            width: 90
+            location: location
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 40
+        Label:
+            text: 'Music data'
+            text_size: self.size
+            size_hint_y: None
+            size_hint_x: None
+            height: 25
+            bold: True
+            valign: 'middle'
+        GenerateData:
+            text: 'Generate data'
+            size_hint_y: None
+            size_hint_x: None
+            font_size: 12
+            valign: 'middle'
+            height: 22
+            width: 90
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 40
+        Label:
+            text: 'Clear temp'
+            text_size: self.size
+            size_hint_y: None
+            size_hint_x: None
+            height: 25
+            bold: True
+            valign: 'middle'
+        ClearTemp:
+            text: 'Remove all'
+            size_hint_y: None
+            size_hint_x: None
+            font_size: 12
+            valign: 'middle'
+            height: 22
+            width: 80
+    Widget:
+
+<AboutScreen>:
+    orientation: 'vertical'
+    Label:
+        text: 'Perancangan Aplikasi Sistem Rekomendasi Musik'
+        text_size: self.size
+        size_hint_y: None
+        halign: 'center'
+        height: 25
+        bold: True
+    Label:
+        text: 'Dengan Metode Convolutional Recurrent Neural Network Berbasis Python'
+        text_size: self.size
+        size_hint_y: None
+        halign: 'center'
+        height: 25
+        bold: True
+    Image:
+        source: 'assets/icons/binus.png'
+        background: utils.rgba('#ffffff')
+    Label:
+        text: '1701349372 - Adiyansjah'
+        text_size: self.size
+        size_hint_y: None
+        halign: 'center'
+        height: 25
+        bold: True
+    Label:
+        text: 'Teknik Informatika dan Matematika'
+        text_size: self.size
+        size_hint_y: None
+        halign: 'center'
+        height: 25
+        bold: True
+    Label:
+        text: 'School of Computer Science'
+        text_size: self.size
+        size_hint_y: None
+        halign: 'center'
+        height: 25
+        bold: True
+    Label:
+        text: 'Universitas Bina Nusantara'
+        text_size: self.size
+        size_hint_y: None
+        halign: 'center'
+        height: 25
+        bold: True
+    Widget:
+
+
+#############################
+# Music Recycle View
+#############################
+
+<TrackDropDown>:
+    id: dropdown
+    size_hint_x: None
+    width: 120
+
+    GetRecommendButton:
+        app: app
+        dropdown: dropdown
+        text: 'Get Relevant'
+        text_size: self.size
+        size_hint_y: None
+        height: 44
+        padding_x: 10
+        halign: 'left'
+        valign: 'middle'
+
+
+<TrackListItem>:
+    id: track
+    app: app
+    orientation: 'horizontal'
+    canvas.before:
+        Color:
+            rgba: utils.rgba('#121212') if self.index % 2 else utils.rgba('#171717')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        text: str(root.index+1)
+        text_size: self.size
+        size_hint_x: None
+        width: 55
+        padding_x: 15
+        valign: 'middle'
+        halign: 'left'
+        font_size: 15
+        color: utils.rgba('#1976d2') if root.order == app.sound.index else utils.rgba('#ffffff')
+    Label:
+        text: root.title
+        text_size: self.size
+        padding_x: 20
+        valign: 'middle'
+        halign: 'left'
+        font_size: 15
+        color: utils.rgba('#1976d2') if root.order == app.sound.index else utils.rgba('#ffffff')
+    TrackMenuButton:
+        source: self.ICON_SRC_BUTTON
+        size_hint_x: None
+        width: 50
+        track: track
+    Label:
+        text: app.sound.format_time(root.duration)
+        text_size: self.size
+        size_hint_x: None
+        width: 60
+        padding_x: 15
+        valign: 'middle'
+        halign: 'right'
+        font_size: 15
+        color: utils.rgba('#909090')
+
+
+<TrackListRecycleView>:
+    viewclass: 'TrackListItem'
+    canvas.before:
+        Color:
+            rgba: utils.rgba('#121212')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    SelectableRecycleBoxLayout:
+        default_size: None, 55
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+
+
+<SpotifyRecycleView>:
+    viewclass: 'SpotifyItem'
+    canvas.before:
+        Color:
+            rgba: utils.rgba('#121212')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    SelectableRecycleBoxLayout:
+        default_size: None, 55
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+
+
+<SearchInputText>:
+    app: app
+    size_hint_y: None
+    height: 40
+    multiline: False
+    hint_text: 'Search'
+    padding: [42, 11]
+    background_color: utils.rgba('#1c1c1c')
+    foreground_color: utils.rgba('#ffffff')
+    cursor_color: utils.rgba('#ffffff')
+
+    canvas.before:
+        Rectangle:
+            source: 'assets/icons/search-active.png'
+            pos: (self.x + 14, self.y + 13)
+            size: (15, 15)
+            
+
+<SearchInputSpotify>:
+    app: app
+    size_hint_y: None
+    height: 40
+    multiline: False
+    hint_text: 'Search'
+    padding: [42, 11]
+    background_color: utils.rgba('#1c1c1c')
+    foreground_color: utils.rgba('#ffffff')
+    cursor_color: utils.rgba('#ffffff')
+
+    canvas.before:
+        Rectangle:
+            source: 'assets/icons/search-active.png'
+            pos: (self.x + 14, self.y + 13)
+            size: (15, 15)
+
+
+#############################
+# Music Control Components
+#############################
+
+<MusicInformation@BoxLayout>:
+    orientation: 'vertical'
+    Label:
+        text_size: self.size
+        halign: 'left'
+        valign: 'middle'
+        font_size: 14
+        text: app.sound.title
+    Label:
+        text_size: self.size
+        halign: 'left'
+        valign: 'middle'
+        font_size: 12
+        color: utils.rgba('#eaeaea')
+        text: app.sound.artist
+
+
+<PreviousButton, PlayButton, NextButton>:
+    size_hint: None, None
+    size: 14, 14
+    pos_hint: {'center_y': 0.5}
+
+
+<StateController@BoxLayout>:
+    orientation: 'horizontal'
+    size_hint_x: None
+    width: self.minimum_width
+    padding: 20, 0, 40, 0
+    spacing: 45
+    PreviousButton:
+        sound: app.sound
+        is_active: app.sound.has_prev
+        source: self.ICON_SRC_ACTIVE if self.is_active else self.ICON_SRC_DISABLED
+    PlayButton:
+        sound: app.sound
+        state: app.sound.state
+        source: self.ICON_SRC_DISABLED_PLAY
+    NextButton:
+        sound: app.sound
+        is_active: app.sound.has_next
+        source: self.ICON_SRC_ACTIVE if self.is_active else self.ICON_SRC_DISABLED
+
+
+<AudioController>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 58
+    padding: 20, 10
+    is_active: app.sound.state is not AudioState.STOP
+    canvas.before:
+        Color:
+            rgba: utils.rgba('#282828')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MusicInformation:
+    StateController:
+    Label:
+        size_hint_x: None
+        width: 40
+        font_size: 12
+        halgin: 'center'
+        text: app.sound.format_time(app.sound.position) if root.is_active else ''
+    AudioSlider:
+        sound: app.sound
+        disabled: not root.is_active
+        max: 100
+        cursor_size: 16, 16
+        background_width: 2
+        background_horizontal: 'assets/textures/sliderh-background.png'
+        background_disabled_horizontal: 'assets/textures/sliderh-background.png'
+        cursor_image: 'assets/icons/cursor-slider-solid.png'
+        cursor_disabled_image: 'assets/icons/cursor-slider-solid.png'
+        value_track: True
+        value_track_width: 1
+        value_track_color: utils.rgba('#ffffff')
+        value: (self.sound.position / self.sound.duration) * self.max if self.sound.duration != 0 else 0
+    Label:
+        id: time_duration
+        size_hint_x: None
+        width: 40
+        font_size: 12
+        halgin: 'center'
+        text: app.sound.format_time(app.sound.duration) if root.is_active else ''
+ 
+
+#############################
+# Music Window
+#############################
+
+<ContentInterface>:
+    orientation: 'vertical'
+    SidebarWrapper:
+        Sidebar:
+            id: sidebar
+            content: content
+            selected_menu: Menu.ABOUT
+            first_load: True
+            MenuItem:
+                menu_id: Menu.LOCAL_ONE
+                name: 'Local Music #1'
+                icon_source: 'assets/icons/musical-note.png'
+                icon_source_active: 'assets/icons/musical-note-active.png'
+                is_selected: sidebar.selected_menu == self.menu_id
+            MenuItem:
+                menu_id: Menu.LOCAL_TWO
+                name: 'Local Music #2'
+                icon_source: 'assets/icons/musical-note.png'
+                icon_source_active: 'assets/icons/musical-note-active.png'
+                is_selected: sidebar.selected_menu == self.menu_id
+            MenuItem:
+                menu_id: Menu.SPOTIFY_ONE
+                name: 'Spotify #1'
+                icon_source: 'assets/icons/spotify.png'
+                icon_source_active: 'assets/icons/spotify-active.png'
+                is_selected: sidebar.selected_menu == self.menu_id
+            MenuItem:
+                menu_id: Menu.SPOTIFY_TWO
+                name: 'Spotify #2'
+                icon_source: 'assets/icons/spotify.png'
+                icon_source_active: 'assets/icons/spotify-active.png'
+                is_selected: sidebar.selected_menu == self.menu_id
+            MenuItem:
+                menu_id: Menu.SETTING
+                name: 'Setting'
+                icon_source: 'assets/icons/setting.png'
+                icon_source_active: 'assets/icons/setting-active.png'
+                is_selected: sidebar.selected_menu == self.menu_id
+            MenuItem:
+                menu_id: Menu.ABOUT
+                name: 'About'
+                icon_source: 'assets/icons/avatar.png'
+                icon_source_active: 'assets/icons/avatar-active.png'
+                is_selected: sidebar.selected_menu == self.menu_id
+            Widget:
+        Content:
+            id: content
+    AudioController:
